@@ -4,6 +4,18 @@ class IsAnagramSolution {
             return false
         }
 
-        return s.split("").sorted().joinToString("") == t.split("").sorted().joinToString("")
+        val lettersMap = mutableMapOf<Char, Int>();
+
+        for (character in s){
+            lettersMap[character] = (lettersMap.getOrDefault(character, 0)) + 1
+        }
+
+        for (character in t){
+            var count = lettersMap.getOrDefault(character, 0);
+            if (count == 0){return false}
+            lettersMap[character] = count - 1;
+        }
+
+        return true
     }
 }
